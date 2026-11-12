@@ -66,7 +66,7 @@ def main():
         # =========================
 
         for epoch in range(EPOCHS):
-
+            print(f"第{EPOCHS+1}次训练")
             model.train()
 
             total_loss = 0.0
