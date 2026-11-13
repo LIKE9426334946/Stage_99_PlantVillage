@@ -1,0 +1,7 @@
+torch>=2.0
+torchvision>=0.15
+PyYAML>=6.0
+Pillow
+matplotlib
+huggingface_hub
+datasets<4

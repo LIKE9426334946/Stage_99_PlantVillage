@@ -1,0 +1,60 @@
+model:
+  name: vit_b_16
+  pretrained: true
+  weights: IMAGENET1K_V1
+  num_classes: 38
+
+training:
+  seed: 23
+  epochs: 10
+  batch_size: 4
+  learning_rate: 0.0001
+  weight_decay: 0.01
+  num_workers: 0
+  output_dir: ./outputs
+  device: auto                 # auto：有 CUDA 用 GPU，否则用 CPU
+  deterministic: true
+  pin_memory: auto
+  log_interval: 100
+  metrics_file: metrics.csv
+  checkpoint_file: last.pth
+
+dataset:
+  root: 'D:\04_Datasets\PlantVillage'
+  image_dir: raw/color
+  train_split: splits/color_train.txt
+  test_split: splits/color_test.txt
+  leaf_map: leaf_grouping/leaf-map.json
+  in_channels: 3
+  image_size: [224, 224]        # [高度, 宽度]；当前预训练权重要求 224×224
+  mean: [0.485, 0.456, 0.406]
+  std: [0.229, 0.224, 0.225]
+  image_extensions: [.jpg, .jpeg, .png, .bmp]
+
+download:
+  repo_id: mohanty/PlantVillage
+  repo_type: dataset
+  name: default
+  trust_remote_code: true
+  train_split: train
+  test_split: test
+
+checks:
+  output_dir: ./checks/dataset_check_outputs
+  num_show: 12
+  property_samples: 10
+  leaf_records: 3
+  max_bad_examples: 10
+  log_interval: 5000
+  check_all_images: false
+  sample_columns: 4
+  sample_figure_size: [14, 11]
+  distribution_figure_size: [20, 8]
+  dpi: 200
+  show_plots: true
+  tick_rotation: 90
+  tick_font_size: 8
+  sample_font_size: 9
+  title_font_size: 14
+  distribution_file: class_distribution.png
+  samples_file: random_samples.png
